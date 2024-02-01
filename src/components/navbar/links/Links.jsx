@@ -1,46 +1,68 @@
-import styles from "./links.module.css"
+"use client";
+
+import { useState } from "react";
+import styles from "./links.module.css";
 import NavLink from "./navLink/navLink";
 
 export default function Links() {
-
     const links = [
         {
             title: "Homepage",
-            path: "/"
+            path: "/",
         },
         {
             title: "About",
-            path: "/about"
+            path: "/about",
         },
         {
             title: "Contact",
-            path: "/contact"
+            path: "/contact",
         },
         {
             title: "Blog",
-            path: "/blog"
+            path: "/blog",
         },
     ];
+
+    const [open, setOpen] = useState(false);
+
     // TEMPORARY
-    const session = true
-    const isAdmin = false
+    const session = true;
+    const isAdmin = false;
 
     return (
-        <div className={styles.links}>
-            {links.map((link) => {
-                return <NavLink link={link} key={link.title}/>
-            })}
-            {/* {isAdmin ? (
-                <NavLink link={{title: "Admin", path: "/admin"}} key="Admin"/>
-            ) : (<div></div>)} */}
-            {session ? (
-                <>
-                    {isAdmin && <NavLink link={{title: "Admin", path: "/admin"}} key="Admin"/>}
-                    <button className={styles.logout}>Logout</button>
-                </>
-            ) : (
-                <NavLink link={{title: "Login", path: "/login"}}/>
+        <div className={styles.container}>
+            <div className={styles.links}>
+                {links.map((link) => (
+                    <NavLink link={link} key={link.title} />
+                ))}
+                {session ? (
+                    <>
+                        {isAdmin && (
+                            <NavLink
+                                link={{ title: "Admin", path: "/admin" }}
+                                key="Admin"
+                            />
+                        )}
+                        <button className={styles.logout}>Logout</button>
+                    </>
+                ) : (
+                    <NavLink link={{ title: "Login", path: "/login" }} />
+                )}
+            </div>
+            <button
+                className={styles.menuButton}
+                onClick={() => setOpen((prev) => !prev)}
+            >
+                Menu
+            </button>
+            {open && (
+                <div className={styles.mobileLinks}>
+                    {links.map((link) => (
+                        <NavLink link={link} key={link.title} />
+                    ))}
+                </div>
             )}
         </div>
-    )
+    );
 }
