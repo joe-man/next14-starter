@@ -5,7 +5,7 @@ const Home = () => {
     return (
         <div className={styles.container}>
             <div className={styles.textContainer}>
-                <h1>Header</h1>
+                <h1 className={styles.title}>Creative Thoughts Agency</h1>
                 <p className={styles.desc}>
                     In the vast tapestry of existence, myriad experiences
                     unfold, weaving together the intricate fabric of life.
